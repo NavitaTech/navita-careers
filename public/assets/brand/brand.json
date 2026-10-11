@@ -1,0 +1,23 @@
+{
+  "_comment": "Navita brand, read at startup. Colours come from the Navita Brand Hub (navitabrand.netlify.app). Replace logo.jpg with an official file of your own at any time - it is used unchanged.",
+  "name": "Navita",
+  "logo": "assets/brand/logo.jpg",
+  "whatsappNumber": "",
+  "standText": "Come and see us at the Navita stand",
+  "colors": {
+    "_comment": "navy #1A3659 and orange #EB692E are the Navita primaries. The 900/700/600 steps are shades of the same navy, so every surface stays on-brand.",
+    "navy-900": "#0F2341",
+    "navy-800": "#1A3659",
+    "navy-700": "#254A75",
+    "navy-600": "#335F91",
+    "sea": "#DCE4EE",
+    "sea-deep": "#C6D3E2",
+    "ink": "#231F20",
+    "paper": "#FFFFFF",
+    "accent": "#2E5E96",
+    "gold": "#EB692E",
+    "good": "#1E8A5B",
+    "near": "#C98A3C",
+    "bad": "#C7372B"
+  }
+}

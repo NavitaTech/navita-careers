@@ -1,0 +1,42 @@
+# Netlify deployment for the booth build.
+#
+# The devices load the site once over any connection, then run entirely offline
+# from the service worker. Nothing is sent back: leads live on the device.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# The service worker must never be served stale, or a device can pin itself to
+# an old build for the length of the event.
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Netlify serves .webmanifest as application/octet-stream by default, which
+# stops Android Chrome offering "Add to Home Screen" - the way the booth
+# devices are meant to be set up.
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json; charset=utf-8"
+
+# Hashed assets are immutable by construction.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

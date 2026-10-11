@@ -1,0 +1,21 @@
+{
+  "$comment": "Presentation-only overrides for city markers. A city is created automatically for every distinct `city` in universities.json; its position defaults to the mean of its universities' coordinates. Entries here override that. `label` is the side the name sits on (n/ne/e/se/s/sw/w/nw) - tuned so no label covers a coastline detail, a pin, or another label. `leader` draws a thin line from dot to label when the label has to sit further out.",
+  "cities": {
+    "London":      { "lon": -0.1276, "lat": 51.5072, "label": "se" },
+    "Oxford":      { "label": "nw" },
+    "Cambridge":   { "label": "e" },
+    "Manchester":  { "label": "w" },
+    "Birmingham":  { "label": "w", "leader": true },
+    "Leeds":       { "label": "e" },
+    "Nottingham":  { "label": "e" },
+    "Newcastle":   { "label": "e" },
+    "Edinburgh":   { "label": "e" },
+    "Glasgow":     { "label": "w" },
+    "Aberdeen":    { "label": "e" },
+    "Belfast":     { "label": "w" },
+    "Cardiff":     { "label": "w", "leader": true },
+    "Bristol":     { "label": "se" },
+    "Southampton": { "label": "se" },
+    "Exeter":      { "label": "sw" }
+  }
+}

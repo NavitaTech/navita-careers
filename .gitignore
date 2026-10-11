@@ -1,0 +1,13 @@
+node_modules/
+dist/
+dist-ssr/
+review/play/
+review/game-map.svg
+review/game-map.png
+map-preview.svg
+map-preview.png
+*.local
+.DS_Store
+.vscode/
+.idea/
+npm-debug.log*

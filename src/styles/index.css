@@ -1,0 +1,146 @@
+@import './fonts.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* The Navita palette, as space-separated RGB so Tailwind's alpha modifiers
+       work and public/assets/brand/brand.json can override any of them at
+       runtime. Navy #1A3659 and orange #EB692E are the brand primaries; the
+       900/700/600 steps are shades of that same navy. */
+    --c-navy-900: 15 35 65;
+    --c-navy-800: 26 54 89;
+    --c-navy-700: 37 74 117;
+    --c-navy-600: 51 95 145;
+    --c-sea: 220 228 238;
+    --c-sea-deep: 198 211 226;
+    --c-ink: 35 31 32;
+    --c-paper: 255 255 255;
+    --c-accent: 46 94 150;
+    --c-gold: 235 105 46;
+    --c-good: 30 138 91;
+    --c-near: 201 138 60;
+    --c-bad: 199 55 43;
+
+    /* Land tints: just enough separation to read as four nations. */
+    --land-england: #ffffff;
+    --land-scotland: #f4f7fb;
+    --land-wales: #fafcfe;
+    --land-northern-ireland: #eff4fa;
+
+    /* One fluid type scale drives the whole kiosk. Height-led, because the
+       layout is always height-constrained on a 16:9 screen. */
+    font-size: clamp(14px, 1.45vh + 0.22vw, 21px);
+    color-scheme: light;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: rgb(var(--c-navy-900));
+    color: rgb(var(--c-ink));
+    font-family: theme('fontFamily.body');
+    overscroll-behavior: none;
+    /* A booth screen is handled, not browsed: nothing scrolls, selects,
+       zooms, or shows a callout. */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
+
+  /* Inputs are the one place text selection has to work. */
+  input,
+  textarea,
+  select {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  :where(button, [role='button'], a, input, select) {
+    touch-action: manipulation;
+  }
+
+  :focus-visible {
+    outline: 3px solid rgb(var(--c-gold));
+    outline-offset: 3px;
+  }
+
+  [dir='rtl'] {
+    font-family: theme('fontFamily.arabic');
+  }
+}
+
+@layer components {
+  /* Numbers that sit in a row - timer, score, leaderboard - never jiggle. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: 'tnum';
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl font-display font-bold
+           tracking-tight transition-transform duration-150 ease-kiosk
+           active:scale-[0.97] disabled:opacity-40 disabled:pointer-events-none;
+    min-height: 3.1rem;
+    padding: 0.7rem 1.6rem;
+    font-size: 1.05rem;
+  }
+  .btn-lg {
+    min-height: 4.2rem;
+    padding: 0.9rem 2.6rem;
+    font-size: 1.5rem;
+  }
+  .btn-primary {
+    @apply bg-accent text-white shadow-card hover:brightness-110;
+  }
+  .btn-gold {
+    @apply bg-gold text-navy-900 shadow-card hover:brightness-105;
+  }
+  .btn-ghost {
+    @apply bg-white/10 text-white hover:bg-white/20;
+  }
+  .btn-quiet {
+    @apply bg-ink/8 text-ink hover:bg-ink/15;
+  }
+
+  .field {
+    @apply w-full rounded-xl border-2 border-ink/15 bg-white px-4 text-ink
+           outline-none transition-colors focus:border-accent;
+    min-height: 3.6rem;
+    font-size: 1.15rem;
+  }
+
+  .panel {
+    @apply rounded-2xl bg-white shadow-card;
+  }
+
+  /* City names on the map. Sized in SVG units so they clear 18px at 1080p. */
+  .map-label {
+    font-family: theme('fontFamily.label');
+    font-weight: 700;
+    paint-order: stroke;
+    stroke: rgb(var(--c-sea));
+    stroke-width: 7px;
+    stroke-linejoin: round;
+    fill: rgb(var(--c-navy-800));
+    pointer-events: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
